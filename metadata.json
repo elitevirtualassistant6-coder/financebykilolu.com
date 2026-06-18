@@ -1,0 +1,6 @@
+{
+  "name": "Joshua's Credit Framework Squeeze Page",
+  "description": "High-converting squeeze page for credit profile training and funding preparation with Google Sheets capture and personalized WhatsApp redirect.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
