@@ -40,19 +40,19 @@ export default function VideoModal({ isOpen, onClose, videoUrl, clientName, titl
       {/* Dark backdrop element with click interaction */}
       <div 
         onClick={onClose}
-        className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity duration-300" 
+        className="absolute inset-0 bg-slate-950/90 backdrop-blur-md transition-opacity duration-300" 
       />
 
       {/* Frame panel */}
-      <div className={`relative w-full ${isShorts ? 'max-w-[340px]' : 'max-w-xl'} rounded-2xl border border-slate-250 bg-white p-4 sm:p-5 shadow-2xl z-10 overflow-hidden animate-in fade-in zoom-in-95 duration-200`}>
+      <div className={`relative w-full ${isShorts ? 'max-w-[340px]' : 'max-w-xl'} rounded-2xl border border-white/10 bg-slate-950 p-4 sm:p-5 shadow-2xl z-10 overflow-hidden animate-in fade-in zoom-in-95 duration-200`}>
         
         {/* Glow corner elements */}
-        <div className="absolute -top-12 -right-12 h-24 w-24 bg-brand/5 rounded-full blur-2xl pointer-events-none" />
+        <div className="absolute -top-12 -right-12 h-24 w-24 bg-brand-muted rounded-full blur-2xl pointer-events-none" />
         
         {/* Close button anchor */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full text-slate-450 hover:text-slate-900 hover:bg-slate-100 transition z-20 cursor-pointer"
+          className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full text-slate-400 hover:text-white hover:bg-slate-800 transition z-20"
           aria-label="Close video player"
         >
           <X className="h-4 w-4" />
@@ -60,11 +60,11 @@ export default function VideoModal({ isOpen, onClose, videoUrl, clientName, titl
 
         {/* Client Tag & Title */}
         <div className="mb-4 pr-8">
-          <div className="flex items-center gap-1.5 text-[10px] font-bold text-brand-dark uppercase tracking-widest bg-brand-muted px-2.5 py-0.5 rounded-full border border-brand/20 w-fit">
+          <div className="flex items-center gap-1.5 text-[10px] font-bold text-brand uppercase tracking-widest bg-brand-muted px-2 py-0.5 rounded-full border border-brand/10 w-fit">
             <Sparkles className="h-3 w-3" />
             <span>Success Story by {clientName}</span>
           </div>
-          <h4 className="text-xs font-semibold text-slate-700 mt-2 line-clamp-1">
+          <h4 className="text-xs font-semibold text-slate-300 mt-2 line-clamp-1">
             "{title}"
           </h4>
         </div>
@@ -74,8 +74,8 @@ export default function VideoModal({ isOpen, onClose, videoUrl, clientName, titl
           {embedUrl ? (
             <div className={
               isShorts 
-                ? "aspect-[9/16] w-full overflow-hidden rounded-xl border border-slate-200 bg-black shadow-inner relative" 
-                : "aspect-video w-full overflow-hidden rounded-xl border border-slate-200 bg-black shadow-inner relative"
+                ? "aspect-[9/16] w-full overflow-hidden rounded-xl border border-white/10 bg-slate-900 shadow-inner relative" 
+                : "aspect-video w-full overflow-hidden rounded-xl border border-white/10 bg-slate-900 shadow-inner relative"
             }>
               <iframe
                 src={embedUrl}
@@ -86,8 +86,8 @@ export default function VideoModal({ isOpen, onClose, videoUrl, clientName, titl
               />
             </div>
           ) : (
-            <div className="aspect-video w-full rounded-xl bg-slate-950 flex flex-col items-center justify-center border border-slate-200 gap-3">
-              <span className="text-xs text-slate-400">Video Player unavailable</span>
+            <div className="aspect-video w-full rounded-xl bg-slate-900 flex flex-col items-center justify-center border border-white/10 gap-3">
+              <span className="text-xs text-slate-500">Video Player unavailable</span>
             </div>
           )}
         </div>
@@ -98,7 +98,7 @@ export default function VideoModal({ isOpen, onClose, videoUrl, clientName, titl
             href={videoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1 text-[10px] uppercase font-bold tracking-widest text-slate-500 hover:text-brand-dark transition"
+            className="flex items-center gap-1 text-[10px] uppercase font-bold tracking-widest text-slate-400 hover:text-brand transition"
           >
             <span>Open on YouTube</span>
             <ExternalLink className="h-3 w-3" />
@@ -106,7 +106,7 @@ export default function VideoModal({ isOpen, onClose, videoUrl, clientName, titl
           
           <button 
             onClick={onClose}
-            className="text-[10px] uppercase font-bold tracking-widest text-slate-400 hover:text-slate-600 transition cursor-pointer"
+            className="text-[10px] uppercase font-bold tracking-widest text-slate-500 hover:text-slate-300 transition"
           >
             Close Player
           </button>

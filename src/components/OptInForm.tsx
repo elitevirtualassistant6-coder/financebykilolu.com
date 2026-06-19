@@ -65,13 +65,13 @@ function RadioOption({ value, label, currentValue, onChange, disabled }: RadioOp
       disabled={disabled}
       className={`w-full text-left flex items-start gap-3 rounded-lg border px-4 py-3 text-xs transition-all duration-150 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed ${
         selected
-          ? 'border-brand bg-brand/10 text-slate-900'
-          : 'border-slate-200 bg-white text-slate-600 hover:border-brand/40 hover:text-slate-900'
+          ? 'border-brand bg-brand/10 text-white'
+          : 'border-white/10 bg-slate-950 text-slate-400 hover:border-brand/40 hover:text-slate-300'
       }`}
     >
       <span
         className={`mt-0.5 flex-shrink-0 h-4 w-4 rounded-full border-2 flex items-center justify-center transition-colors ${
-          selected ? 'border-brand' : 'border-slate-400'
+          selected ? 'border-brand' : 'border-slate-600'
         }`}
       >
         {selected && <span className="h-2 w-2 rounded-full bg-brand block" />}
@@ -253,7 +253,7 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-muted text-brand border border-brand/20 shadow-inner">
             <BookOpen className="h-6 w-6 text-brand" />
           </div>
-          <h4 className="text-md font-bold text-slate-900 tracking-wide uppercase">
+          <h4 className="text-md font-bold text-white tracking-wide uppercase">
             DIY Course — Perfect Fit
           </h4>
           {routeReason && (
@@ -261,7 +261,7 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
               {routeReason}
             </p>
           )}
-          <p className="text-[11px] text-slate-600 max-w-sm">
+          <p className="text-[11px] text-slate-400 max-w-sm">
             Our DIY course gives you AI prompts, legal documents, perfected dispute scripts, and escalation strategy to follow yourself. We've opened the course page for you.
           </p>
         </div>
@@ -277,7 +277,7 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
           </a>
           <button
             onClick={handleReset}
-            className="w-full flex items-center justify-center gap-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-200 py-2 text-[10px] text-slate-600 hover:text-slate-800 transition duration-200"
+            className="w-full flex items-center justify-center gap-1.5 rounded-lg bg-slate-950 hover:bg-slate-900 border border-white/5 py-2 text-[10px] text-slate-500 hover:text-slate-300 transition duration-200"
           >
             <RefreshCw className="h-3 w-3" />
             <span>Start over / Different answers</span>
@@ -367,7 +367,7 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
                 ? 'w-5 bg-brand'
                 : i < step
                 ? 'w-1.5 bg-brand/40'
-                : 'w-1.5 bg-slate-200'
+                : 'w-1.5 bg-white/10'
             }`}
           />
         ))}
@@ -383,9 +383,9 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
       {step === 0 && (
         <div className={`space-y-4 ${stepAnim}`}>
           <div className="space-y-1.5">
-            <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600">Full Name</label>
+            <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500">Full Name</label>
             <div className="relative">
-              <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400">
+              <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-500">
                 <User className="h-4 w-4" />
               </span>
               <input
@@ -394,14 +394,14 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
                 onChange={(e) => setName(e.target.value)}
                 onKeyDown={(e) => { if (e.key === 'Enter') emailRef.current?.focus(); }}
                 placeholder="Alex Thompson"
-                className="w-full rounded-lg bg-white border border-slate-300 pl-11 pr-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-brand transition-all shadow-sm"
+                className="w-full rounded-lg bg-slate-950 border border-white/10 pl-11 pr-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-brand transition-all"
               />
             </div>
           </div>
           <div className="space-y-1.5">
-            <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-600">Email Address</label>
+            <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500">Email Address</label>
             <div className="relative">
-              <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400">
+              <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-500">
                 <Mail className="h-4 w-4" />
               </span>
               <input
@@ -411,7 +411,7 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
                 onChange={(e) => setEmail(e.target.value)}
                 onKeyDown={(e) => { if (e.key === 'Enter') handleNext(); }}
                 placeholder="alex@company.com"
-                className="w-full rounded-lg bg-white border border-slate-300 pl-11 pr-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-brand transition-all shadow-sm"
+                className="w-full rounded-lg bg-slate-950 border border-white/10 pl-11 pr-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-brand transition-all"
               />
             </div>
           </div>
@@ -430,7 +430,7 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
       {step === 1 && (
         <div className={`space-y-4 ${stepAnim}`}>
           <div>
-            <p className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-1">
+            <p className="text-xs font-bold text-white uppercase tracking-wider mb-1">
               Do you have any negative credit markers?
             </p>
             <p className="text-[10px] text-slate-500 mb-3">We help with early negative marker removals.</p>
@@ -451,7 +451,7 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
               type="button"
               onClick={goBack}
               title="Previous question"
-              className="flex items-center justify-center rounded-lg bg-white hover:bg-slate-50 border border-slate-200 px-4 py-3 text-slate-500 hover:text-slate-900 transition duration-200 cursor-pointer"
+              className="flex items-center justify-center rounded-lg bg-slate-950 hover:bg-slate-900 border border-white/10 px-4 py-3 text-slate-400 hover:text-white transition duration-200 cursor-pointer"
             >
               <ArrowLeft className="h-4 w-4" />
             </button>
@@ -463,7 +463,7 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
       {step === 2 && (
         <div className={`space-y-4 ${stepAnim}`}>
           <div>
-            <p className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-1">
+            <p className="text-xs font-bold text-white uppercase tracking-wider mb-1">
               Which option sounds most like what you want?
             </p>
             <p className="text-[10px] text-slate-500 mb-3">
@@ -509,7 +509,7 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
               onClick={goBack}
               disabled={isSubmitting}
               title="Previous question"
-              className="flex items-center justify-center rounded-lg bg-white hover:bg-slate-50 border border-slate-200 px-4 py-3 text-slate-500 hover:text-slate-900 transition duration-200 cursor-pointer disabled:opacity-40"
+              className="flex items-center justify-center rounded-lg bg-slate-950 hover:bg-slate-900 border border-white/10 px-4 py-3 text-slate-400 hover:text-white transition duration-200 cursor-pointer disabled:opacity-40"
             >
               <ArrowLeft className="h-4 w-4" />
             </button>
@@ -521,7 +521,7 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
       {step === 3 && (
         <div className={`space-y-4 ${stepAnim}`}>
           <div>
-            <p className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-1">
+            <p className="text-xs font-bold text-white uppercase tracking-wider mb-1">
               Are you able to invest at least £1,000 if you are accepted for our 1-2-1 done-for-you service?
             </p>
             <p className="text-[10px] text-slate-500 mb-3">
@@ -566,7 +566,7 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
               onClick={goBack}
               disabled={isSubmitting}
               title="Previous question"
-              className="flex items-center justify-center rounded-lg bg-white hover:bg-slate-50 border border-slate-200 px-4 py-3 text-slate-500 hover:text-slate-900 transition duration-200 cursor-pointer disabled:opacity-40"
+              className="flex items-center justify-center rounded-lg bg-slate-950 hover:bg-slate-900 border border-white/10 px-4 py-3 text-slate-400 hover:text-white transition duration-200 cursor-pointer disabled:opacity-40"
             >
               <ArrowLeft className="h-4 w-4" />
             </button>
@@ -578,7 +578,7 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
       {step === 4 && (
         <div className={`space-y-4 ${stepAnim}`}>
           <div>
-            <p className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-1">
+            <p className="text-xs font-bold text-white uppercase tracking-wider mb-1">
               Are you willing to provide full details about what happened, including screenshots, emails, correspondence, and a detailed written explanation?
             </p>
             <p className="text-[10px] text-slate-500 mb-3">
@@ -636,7 +636,7 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
               onClick={goBack}
               disabled={isSubmitting}
               title="Previous question"
-              className="flex items-center justify-center rounded-lg bg-white hover:bg-slate-50 border border-slate-200 px-4 py-3 text-slate-500 hover:text-slate-900 transition duration-200 cursor-pointer disabled:opacity-40"
+              className="flex items-center justify-center rounded-lg bg-slate-950 hover:bg-slate-900 border border-white/10 px-4 py-3 text-slate-400 hover:text-white transition duration-200 cursor-pointer disabled:opacity-40"
             >
               <ArrowLeft className="h-4 w-4" />
             </button>
