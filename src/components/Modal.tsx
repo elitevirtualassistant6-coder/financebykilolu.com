@@ -17,19 +17,19 @@ export default function Modal({ isOpen, onClose, settings }: ModalProps) {
       {/* Dark backdrop element with click interaction */}
       <div 
         onClick={onClose}
-        className="absolute inset-0 bg-slate-950/85 backdrop-blur-md transition-opacity duration-300" 
+        className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity duration-300" 
       />
 
       {/* Frame panel */}
-      <div className="relative w-full max-w-md rounded-2xl border border-white/10 bg-slate-950 p-6 sm:p-8 shadow-2xl z-10 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+      <div className="relative w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-2xl z-10 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
         
         {/* Glow corner elements */}
-        <div className="absolute -top-12 -right-12 h-24 w-24 bg-brand-muted rounded-full blur-2xl" />
+        <div className="absolute -top-12 -right-12 h-24 w-24 bg-brand/5 rounded-full blur-2xl" />
         
         {/* Close button anchor */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full text-slate-400 hover:text-white hover:bg-slate-850 transition"
+          className="absolute top-4 right-4 flex h-8 w-8 items-center justify-center rounded-full text-slate-400 hover:text-slate-900 hover:bg-slate-100 transition"
           aria-label="Close form Modal"
         >
           <X className="h-4 w-4" />
@@ -37,15 +37,15 @@ export default function Modal({ isOpen, onClose, settings }: ModalProps) {
 
         {/* Header content labels */}
         <div className="text-center space-y-1">
-          <div className="inline-flex items-center gap-1 text-[10px] font-bold text-brand uppercase tracking-widest bg-brand-muted px-2.5 py-1 rounded-full border border-brand/10">
+          <div className="inline-flex items-center gap-1 text-[10px] font-bold text-brand-dark uppercase tracking-widest bg-brand-muted px-2.5 py-1 rounded-full border border-brand/20">
             <Sparkles className="h-3 w-3" />
             <span>Instant Access Masterclass</span>
           </div>
           
-          <h3 className="text-lg font-extrabold text-white mt-3">
+          <h3 className="text-lg font-extrabold text-slate-900 mt-3">
             🎥 Access Free Training
           </h3>
-          <p className="text-xs text-slate-400 leading-normal max-w-xs mx-auto">
+          <p className="text-xs text-slate-600 leading-normal max-w-xs mx-auto">
             Enter your details to register and launch the credit framework video sequence on WhatsApp instantly
           </p>
         </div>
