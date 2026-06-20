@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { AppSettings } from '../types';
-import { ArrowRight, ArrowLeft, Loader2, Shield, Mail, User, CheckCircle2, ExternalLink, RefreshCw, BookOpen } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Loader2, Shield, Mail, User, Phone, CheckCircle2, ExternalLink, RefreshCw, BookOpen } from 'lucide-react';
 
 interface OptInFormProps {
   settings: AppSettings;
@@ -87,6 +87,7 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
   const [direction, setDirection] = useState<'forward' | 'back'>('forward');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [q1Answer, setQ1Answer] = useState('');
   const [q2Answer, setQ2Answer] = useState('');
   const [q3Answer, setQ3Answer] = useState('');
@@ -111,6 +112,7 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
           body: JSON.stringify({
             name: name.trim(),
             email: email.trim(),
+            phone: phone.trim(),
             source: sourceLocation,
             timestamp: new Date().toISOString(),
             ...extraData,
@@ -138,8 +140,8 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
     setErrorMsg('');
 
     if (step === 0) {
-      if (!name.trim() || !email.trim()) {
-        setErrorMsg('Please enter your full name and email address.');
+      if (!name.trim() || !phone.trim() || !email.trim()) {
+        setErrorMsg('Please enter your name, phone number and email address.');
         return;
       }
       setDirection('forward');
@@ -233,6 +235,7 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
   const handleReset = () => {
     setStep(0);
     setName('');
+    setPhone('');
     setEmail('');
     setQ1Answer('');
     setQ2Answer('');
@@ -394,6 +397,23 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
                 onChange={(e) => setName(e.target.value)}
                 onKeyDown={(e) => { if (e.key === 'Enter') emailRef.current?.focus(); }}
                 placeholder="Alex Thompson"
+                className="w-full rounded-lg bg-slate-950 border border-white/10 pl-11 pr-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-brand transition-all"
+              />
+            </div>
+          </div>
+          <div className="space-y-1.5">
+            <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500">Phone Number</label>
+            <div className="relative">
+              <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-500">
+                <Phone className="h-4 w-4" />
+              </span>
+              <input
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter') emailRef.current?.focus(); }}
+                autoComplete="tel"
+                placeholder="+44 7700 000000"
                 className="w-full rounded-lg bg-slate-950 border border-white/10 pl-11 pr-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-brand transition-all"
               />
             </div>

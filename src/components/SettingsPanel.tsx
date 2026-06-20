@@ -40,13 +40,27 @@ function doPost(e) {
   
   // Set up header column if empty
   if (sheet.getLastRow() === 0) {
-    sheet.appendRow(["Timestamp", "First & Last Name", "Email Address"]);
+    sheet.appendRow(["Timestamp", "Name", "Email Address", "Q1", "Q2", "Q3", "Q4", "Phone Number"]);
   }
   
   try {
     var data = JSON.parse(e.postData.contents);
     var timestamp = new Date();
-    sheet.appendRow([timestamp, data.name, data.email]);
+    
+    // Extract key variables securely
+    var name = data.name || "";
+    var email = data.email || "";
+    var phone = data.phone || data.Phone || data.phoneNumber || data.phone_number || "";
+    var q1 = data.q1 || data.Q1 || "";
+    var q2 = data.q2 || data.Q2 || "";
+    var q3 = data.q3 || data.Q3 || "";
+    var q4 = data.q4 || data.Q4 || "";
+    
+    // Append in the correct header order
+    // Prefix phone with apostrophe to force Google Sheets to store as plain text (prevents + being parsed as formula)
+    var phoneSafe = phone ? ("'" + phone) : "";
+    sheet.appendRow([timestamp, name, email, q1, q2, q3, q4, phoneSafe]);
+
     
     return ContentService.createTextOutput(JSON.stringify({ "status": "success" }))
       .setMimeType(ContentService.MimeType.JSON)
@@ -256,7 +270,7 @@ function doOptions(e) {
                 <div class="space-y-1.5">
                   <label class="text-[10px] font-bold uppercase tracking-wider text-slate-600 flex items-center gap-1.5">
                     <svg class="h-3.5 w-3.5 text-brand-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-                    First &amp; Last Name
+                    Name
                   </label>
                   <input type="text" id="lead-name" required placeholder="e.g. John Doe" class="w-full rounded-lg bg-white border border-slate-300 px-4 py-2.5 text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-brand-dark focus:border-brand-dark transition">
                 </div>
@@ -814,7 +828,7 @@ function doOptions(e) {
       <button
         id="settings-trigger-btn"
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-slate-900 border border-white/10 text-slate-400 shadow-2xl hover:bg-slate-800 hover:text-brand hover:border-brand/30 transition-all duration-300 group cursor-pointer"
+        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-600 shadow-2xl hover:bg-slate-50 hover:text-brand-dark hover:border-brand/40 transition-all duration-300 group cursor-pointer"
         aria-label="Open Integration Settings"
       >
         <Cog className="h-6 w-6 animate-spin-slow group-hover:rotate-45 transition-transform" />
@@ -822,32 +836,32 @@ function doOptions(e) {
 
       {/* Slide-over sidebar panel */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 overflow-hidden bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-50 overflow-hidden bg-slate-900/30 backdrop-blur-sm animate-in fade-in duration-200">
           <div className="absolute inset-y-0 right-0 max-w-full pl-10 flex">
-            <div className="w-screen max-w-lg bg-slate-950 border-l border-white/10 shadow-2xl flex flex-col h-full overflow-hidden">
+            <div className="w-screen max-w-lg bg-white border-l border-slate-200 shadow-2xl flex flex-col h-full overflow-hidden">
               
               {/* Header */}
-              <div className="px-6 py-6 border-b border-white/10 bg-slate-900 flex justify-between items-center shrink-0">
+              <div className="px-6 py-6 border-b border-slate-200 bg-slate-50 flex justify-between items-center shrink-0">
                 <div className="flex items-center gap-2">
-                  <Cog className="h-5 w-5 text-brand" />
-                  <h2 className="text-sm font-bold text-white uppercase tracking-wider">Campaign Orchestrator</h2>
+                  <Cog className="h-5 w-5 text-brand-dark" />
+                  <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Campaign Orchestrator</h2>
                 </div>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="p-1 rounded-full text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+                  className="p-1 rounded-full text-slate-400 hover:text-slate-950 hover:bg-slate-100 transition-colors cursor-pointer"
                 >
                   <X className="h-5 w-5" />
                 </button>
               </div>
 
               {/* Sub-Tabs Selector menu list */}
-              <div className="flex border-b border-white/10 bg-slate-900/60 p-1 shrink-0">
+              <div className="flex border-b border-slate-200 bg-slate-100/50 p-1 shrink-0">
                 <button
                   onClick={() => setActiveTab('config')}
                   className={`flex-1 py-2 text-[10px] font-bold tracking-wide uppercase rounded transition-all text-center ${
                     activeTab === 'config'
-                      ? 'bg-slate-800 text-brand shadow-sm ring-1 ring-white/10'
-                      : 'text-slate-500 hover:text-slate-300'
+                      ? 'bg-white text-brand-dark shadow-sm ring-1 ring-slate-200'
+                      : 'text-slate-500 hover:text-slate-800'
                   }`}
                 >
                   1. Config
@@ -856,8 +870,8 @@ function doOptions(e) {
                   onClick={() => setActiveTab('script')}
                   className={`flex-1 py-2 text-[10px] font-bold tracking-wide uppercase rounded transition-all text-center ${
                     activeTab === 'script'
-                      ? 'bg-slate-800 text-brand shadow-sm ring-1 ring-white/10'
-                      : 'text-slate-500 hover:text-slate-300'
+                      ? 'bg-white text-brand-dark shadow-sm ring-1 ring-slate-200'
+                      : 'text-slate-500 hover:text-slate-800'
                   }`}
                 >
                   2. Google Script
@@ -866,8 +880,8 @@ function doOptions(e) {
                   onClick={() => setActiveTab('standalone')}
                   className={`flex-1 py-2 text-[10px] font-bold tracking-wide uppercase rounded transition-all text-center ${
                     activeTab === 'standalone'
-                      ? 'bg-slate-800 text-brand shadow-sm ring-1 ring-white/10 animate-pulse'
-                      : 'text-slate-500 hover:text-slate-300'
+                      ? 'bg-white text-brand-dark shadow-sm ring-1 ring-slate-200 animate-pulse'
+                      : 'text-slate-500 hover:text-slate-800'
                   }`}
                 >
                   3. Export HTML
@@ -878,8 +892,8 @@ function doOptions(e) {
               <div className="flex-1 p-6 space-y-6 overflow-y-auto">
                 {activeTab === 'config' && (
                   <div className="space-y-6 animate-in fade-in duration-200">
-                    <div className="rounded-xl bg-slate-900 p-4 border border-white/10 text-xs text-slate-400 space-y-2 leading-relaxed">
-                      <p className="font-semibold text-brand">⚡ Live Campaign Variables</p>
+                    <div className="rounded-xl bg-slate-50 p-4 border border-slate-200 text-xs text-slate-600 space-y-2 leading-relaxed">
+                      <p className="font-semibold text-brand-dark">⚡ Live Campaign Variables</p>
                       <p>
                         Configure where your opt-ins are recorded and how mentors and client success stories redirect to private channels. Updates are propagated immediately.
                       </p>
@@ -888,7 +902,7 @@ function doOptions(e) {
                     <form onSubmit={handleSave} className="space-y-4">
                       {/* Google Web App URL Field */}
                       <div className="space-y-1.5">
-                        <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between">
+                        <label className="text-[11px] font-bold uppercase tracking-wider text-slate-700 flex items-center justify-between">
                           <span className="flex items-center gap-1">
                             <Database className="h-3.5 w-3.5 text-brand" />
                             Google sheets Apps Script Web App URL
@@ -899,7 +913,7 @@ function doOptions(e) {
                           value={googleWebAppUrl}
                           onChange={(e) => setGoogleWebAppUrl(e.target.value)}
                           placeholder="e.g. https://script.google.com/macros/s/.../exec"
-                          className="w-full rounded-lg bg-slate-900 border border-white/10 px-4 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-brand focus:border-brand transition"
+                          className="w-full rounded-lg bg-white border border-slate-300 px-4 py-2.5 text-xs text-slate-900 placeholder-slate-450 focus:outline-none focus:ring-1 focus:ring-brand focus:border-brand transition"
                         />
                         <p className="text-[10px] text-slate-500">
                           Deploy as Apps Script (Tab 2) to log anonymous submissions instantly.
@@ -908,7 +922,7 @@ function doOptions(e) {
 
                       {/* WhatsApp Recipient Phone Number Field */}
                       <div className="space-y-1.5">
-                        <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between">
+                        <label className="text-[11px] font-bold uppercase tracking-wider text-slate-700 flex items-center justify-between">
                           <span className="flex items-center gap-1">
                             <Phone className="h-3.5 w-3.5 text-brand" />
                             Joshua's WhatsApp Number
@@ -919,7 +933,7 @@ function doOptions(e) {
                           value={whatsAppNumber}
                           onChange={(e) => setWhatsAppNumber(e.target.value)}
                           placeholder="e.g. 447424445868"
-                          className="w-full rounded-lg bg-slate-900 border border-white/10 px-4 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-brand focus:border-brand transition"
+                          className="w-full rounded-lg bg-white border border-slate-300 px-4 py-2.5 text-xs text-slate-900 placeholder-slate-450 focus:outline-none focus:ring-1 focus:ring-brand focus:border-brand transition"
                         />
                         <p className="text-[10px] text-slate-500 font-mono font-semibold">
                           Must be international format only without symbols/spaces (e.g. 447123456789).
@@ -928,7 +942,7 @@ function doOptions(e) {
 
                       {/* Free Training Video URL Field */}
                       <div className="space-y-1.5">
-                        <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between">
+                        <label className="text-[11px] font-bold uppercase tracking-wider text-slate-700 flex items-center justify-between">
                           <span className="flex items-center gap-1">
                             <Video className="h-3.5 w-3.5 text-brand" />
                             Free Masterclass Video Link (YouTube Shorts / Video)
@@ -939,7 +953,7 @@ function doOptions(e) {
                           value={freeTrainingUrl}
                           onChange={(e) => setFreeTrainingUrl(e.target.value)}
                           placeholder="e.g. https://youtube.com/shorts/7JLKIPsRREQ"
-                          className="w-full rounded-lg bg-slate-950 border border-slate-800 px-4 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition"
+                          className="w-full rounded-lg bg-white border border-slate-300 px-4 py-2.5 text-xs text-slate-900 placeholder-slate-450 focus:outline-none focus:ring-1 focus:ring-brand focus:border-brand transition"
                         />
                         <p className="text-[10px] text-slate-500">
                           Presented key training video loaded in post-submission iframe view.
@@ -948,14 +962,14 @@ function doOptions(e) {
 
                       {/* WhatsApp Custom Message Prompt Area */}
                       <div className="space-y-1.5">
-                        <label className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                        <label className="text-[11px] font-bold uppercase tracking-wider text-slate-700">
                           Custom Pre-filled WhatsApp Prompt
                         </label>
                         <textarea
                           value={customMessage}
                           onChange={(e) => setCustomMessage(e.target.value)}
                           rows={4}
-                          className="w-full rounded-lg bg-slate-900 border border-white/10 px-4 py-2.5 text-xs text-white placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-brand focus:border-brand transition font-mono"
+                          className="w-full rounded-lg bg-white border border-slate-300 px-4 py-2.5 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-brand focus:border-brand transition font-mono"
                           placeholder="Use {NAME} and {EMAIL} as dynamic placeholders."
                         />
                         <p className="text-[10px] text-slate-500">
@@ -982,13 +996,13 @@ function doOptions(e) {
 
                 {activeTab === 'script' && (
                   <div className="space-y-4 animate-in fade-in duration-200">
-                    <div className="border-t border-white/10 pt-1 space-y-3">
-                      <h3 className="text-xs font-bold text-white uppercase tracking-wide flex items-center gap-1.5">
-                        <HelpCircle className="h-4 w-4 text-brand" />
+                    <div className="border-t border-slate-200 pt-1 space-y-3">
+                      <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wide flex items-center gap-1.5">
+                        <HelpCircle className="h-4 w-4 text-brand-dark" />
                         Set Up Your Google Sheets Infrastructure
                       </h3>
                       
-                      <ol className="text-xs text-slate-400 space-y-2 list-decimal list-inside leading-relaxed">
+                      <ol className="text-xs text-slate-600 space-y-2 list-decimal list-inside leading-relaxed">
                         <li>Create an empty Google Sheet.</li>
                         <li>Go to <b>Extensions &gt; Apps Script</b>.</li>
                         <li>Paste the Apps Script source code shown below.</li>
@@ -998,12 +1012,12 @@ function doOptions(e) {
                       </ol>
 
                       {/* Copy code banner Container */}
-                      <div className="relative mt-2 rounded-xl bg-slate-900 border border-white/10 overflow-hidden">
-                        <div className="flex justify-between items-center px-4 py-2 border-b border-white/10 bg-slate-800/60">
+                      <div className="relative mt-2 rounded-xl bg-slate-50 border border-slate-200 overflow-hidden">
+                        <div className="flex justify-between items-center px-4 py-2 border-b border-slate-200 bg-slate-100/60">
                           <span className="text-[9px] font-mono text-slate-500">apps-script-source-code.gs</span>
                           <button
                             onClick={handleCopyScript}
-                            className="flex items-center gap-1 text-[10px] text-brand hover:text-brand/80 transition-all font-semibold cursor-pointer"
+                            className="flex items-center gap-1 text-[10px] text-brand-dark hover:text-brand-dark/80 transition-all font-semibold cursor-pointer"
                           >
                             {copiedScript ? (
                               <>
@@ -1018,7 +1032,7 @@ function doOptions(e) {
                             )}
                           </button>
                         </div>
-                        <pre className="p-4 text-[10px] text-slate-400 font-mono overflow-x-auto max-h-56 leading-normal bg-slate-900/50">
+                        <pre className="p-4 text-[10px] text-slate-700 font-mono overflow-x-auto max-h-56 leading-normal bg-slate-50/50">
                           {appsScriptCode}
                         </pre>
                       </div>
@@ -1028,15 +1042,15 @@ function doOptions(e) {
 
                 {activeTab === 'standalone' && (
                   <div className="space-y-5 animate-in fade-in duration-200">
-                    <div className="rounded-xl bg-brand-muted/10 p-4 border border-brand/20 text-xs text-slate-400 space-y-2 leading-relaxed">
-                      <p className="font-semibold text-brand flex items-center gap-1">
+                    <div className="rounded-xl bg-teal-50/60 p-4 border border-brand/20 text-xs text-slate-600 space-y-2 leading-relaxed">
+                      <p className="font-semibold text-brand-dark flex items-center gap-1">
                         <Sparkles className="h-3.5 w-3.5 text-brand" />
                         Aesthetic Standalone Squeeze Page
                       </p>
                       <p>
                         This dynamically gathers all variables configured in Tab 1 (your WhatsApp redirect template, lead spreadsheet triggers, video playback URLs, brand color grids) and bundles them into an <b>optimal, standalone single-file HTML landing page</b>.
                       </p>
-                      <p className="text-[11px] font-semibold text-slate-300">
+                      <p className="text-[11px] font-semibold text-slate-700">
                         No React server node required! Save and host it anywhere (Netlify, Vercel, cPanel, or local folders) instantly.
                       </p>
                     </div>
@@ -1069,12 +1083,12 @@ function doOptions(e) {
                     </div>
 
                     {/* Interactive Code preview box */}
-                    <div className="rounded-xl bg-slate-900 border border-white/10 overflow-hidden">
-                      <div className="flex justify-between items-center px-4 py-2 border-b border-white/10 bg-slate-800/60">
+                    <div className="rounded-xl bg-slate-50 border border-slate-200 overflow-hidden">
+                      <div className="flex justify-between items-center px-4 py-2 border-b border-slate-200 bg-slate-100/60">
                         <span className="text-[9px] font-mono text-slate-500">compiled-standalone-squeeze.html</span>
                         <span className="text-[9px] font-semibold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">Tailwind Play CDN Ready</span>
                       </div>
-                      <pre className="p-4 text-[9px] text-slate-400 font-mono overflow-x-auto max-h-56 leading-normal bg-slate-900/50">
+                      <pre className="p-4 text-[9px] text-slate-600 font-mono overflow-x-auto max-h-56 leading-normal bg-slate-50/50">
                         {generateStandaloneHtml()}
                       </pre>
                     </div>
