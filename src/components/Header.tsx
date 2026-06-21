@@ -72,7 +72,7 @@ export default function Header({ currentView, onSetView, onOpenModal }: HeaderPr
               onClick={() => onSetView('landing')}
               className="inline-flex items-center gap-1.5 rounded-lg border border-white/10 bg-slate-900 hover:bg-slate-800 active:scale-95 transition-all px-4 py-2 text-[10px] font-black uppercase tracking-wider text-slate-200 cursor-pointer"
             >
-              <span>Need Credit Repair?</span>
+              <span>FIX MY CREDIT FIRST</span>
             </button>
           )}
         </div>

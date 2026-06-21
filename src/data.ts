@@ -42,35 +42,51 @@ export const LEARN_FEATURES: LearnFeature[] = [
 export const TESTIMONIALS: Testimonial[] = [
   {
     id: 't1',
-    title: 'CIFAS Marker successfully challenged & removed',
-    clientName: 'David K.',
-    role: 'Professional Services',
+    title: 'Kayla had an unfair CIFAS marker removed after following our steps',
+    clientName: 'kayla',
+    role: 'Case Study',
     imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400',
     videoUrl: 'https://youtube.com/shorts/GFZ5r9O3dDs'
   },
   {
     id: 't2',
-    title: 'Secured £45,000 corporate finance in 3 months',
-    clientName: 'Michelle O.',
-    role: 'Tech Founder',
+    title: 'Bernard had a default off in just 3 days',
+    clientName: 'Bernard',
+    role: 'Success Story',
     imageUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400',
     videoUrl: 'https://youtube.com/shorts/PXCALQrqkhA'
   },
   {
+    id: 't3',
+    title: 'Chris went for Done for you 1-2-1 and the CIFAS marker was finally removed',
+    clientName: 'Chris',
+    role: 'Done-for-You Client',
+    imageUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400',
+    videoUrl: 'https://www.youtube.com/shorts/nO-dms_ZZEQ?feature=share'
+  },
+  {
     id: 't4',
-    title: 'Clean profile allowed me to buy my family home',
-    clientName: 'Sarah T.',
-    role: 'Retail Manager',
-    imageUrl: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=400',
-    videoUrl: 'https://youtube.com/shorts/2XOn6X1eROY'
+    title: 'Donte had multiple CIFAS markers & Late payments removed following our process',
+    clientName: 'Donte',
+    role: 'Squeeze Graduate',
+    imageUrl: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=400',
+    videoUrl: 'https://youtu.be/U_ZITIVrg1w'
   },
   {
     id: 't5',
-    title: 'CCJ dispute cleared; now set up for funding',
-    clientName: 'Marcus G.',
-    role: 'Logistics Consultant',
-    imageUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=400',
-    videoUrl: 'https://youtube.com/shorts/f6ZG5LVZMT0'
+    title: 'Amadou had 4 defaults removed after making a scripted phone call',
+    clientName: 'Amadou',
+    role: 'Challenge Case Study',
+    imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400',
+    videoUrl: 'https://youtube.com/shorts/D7ZkCNWeuEc'
+  },
+  {
+    id: 't6',
+    title: 'Wasim had multiple accounts shut down and had his complaint rejected',
+    clientName: 'Wasim',
+    role: 'Case Review',
+    imageUrl: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400',
+    videoUrl: 'https://youtube.com/shorts/Ml9pjnB5b5Y?feature=share'
   }
 ];
 
