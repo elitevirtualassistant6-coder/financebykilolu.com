@@ -86,7 +86,7 @@ export default function KiloluLogo({
         <path d="M 210 210 L 210 370" />
         
         {/* L (First L) - tall vertical line, with a bottom hook that gracefully curves left */}
-        <path d="M 240 210 L 240 360 Q 240 370 230 370" />
+        <path d="M 240 210 L 240 360 Q 240 370 250 370" />
         
         {/* O */}
         <path d="M 270 230 C 270 210 320 210 320 230 L 320 350 C 320 370 270 370 270 350 Z" />

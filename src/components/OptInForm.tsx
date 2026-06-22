@@ -96,11 +96,10 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [routeOutcome, setRouteOutcome] = useState<'diy' | 'dfy' | null>(null);
   const [routeReason, setRouteReason] = useState('');
-  const [whatsappUrl, setWhatsappUrl] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
   const isShorts = settings.freeTrainingUrl ? settings.freeTrainingUrl.includes('/shorts/') : true;
-  const embedUrl = getYoutubeEmbedUrl(settings.freeTrainingUrl);
+  const embedUrl = getYoutubeEmbedUrl(settings.freeTrainingUrl || 'https://youtu.be/V-hrJnIMMpU?si=EnPglEEjEyDNY-CF');
 
   const submitToSheets = async (extraData: Record<string, string> = {}) => {
     if (settings.googleWebAppUrl && settings.googleWebAppUrl !== 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL') {
@@ -212,22 +211,9 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
         return;
       }
       await submitToSheets({ Q1: q1Answer, Q2: SERVICE_OPTIONS.find((o) => o.value === q2Answer)?.label ?? q2Answer, Q3: 'Yes', Q4: 'Yes' });
-      let personalizedMsg = settings.customMessage;
-      personalizedMsg = personalizedMsg.replace(/{NAME}/g, name.trim());
-      personalizedMsg = personalizedMsg.replace(/{EMAIL}/g, email.trim());
-      const encodedMessage = encodeURIComponent(personalizedMsg);
-      const whatsAppNumberToUse = settings.whatsAppNumber || '447424445868';
-      const targetUrl = `https://wa.me/${whatsAppNumberToUse}?text=${encodedMessage}`;
-      setWhatsappUrl(targetUrl);
       setRouteOutcome('dfy');
       setIsSubmitted(true);
       setIsSubmitting(false);
-      // Attempt redirecting instantly to WhatsApp session or open in new tab
-      try {
-        window.open(targetUrl, '_blank');
-      } catch (err) {
-        console.warn('Popup blocked, expecting manual click fallback');
-      }
       return;
     }
   };
@@ -244,7 +230,6 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
     setIsSubmitted(false);
     setRouteOutcome(null);
     setRouteReason('');
-    setWhatsappUrl('');
     setErrorMsg('');
   };
 
@@ -290,19 +275,22 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
     );
   }
 
-  // --- Submitted: DFY WhatsApp outcome ---
-  if (isSubmitted && routeOutcome === 'dfy') {
+  // --- Submitted: DFY consultation booked outcome ---
+  if (isSubmitted && routeOutcome === 'dfy') { 
     return (
       <div className="space-y-5 animate-in fade-in duration-300">
-        <div className="flex flex-col items-center text-center space-y-2 mb-2">
+        <div className="flex flex-col items-center text-center space-y-3 mb-2">
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-muted text-brand border border-brand/20 shadow-inner">
-            <CheckCircle2 className="h-6 w-6 text-brand-dark" />
+            <CheckCircle2 className="h-6 w-6 text-brand" />
           </div>
-          <h4 className="text-md font-bold text-slate-900 tracking-wide uppercase">
-            Spot Secured!
+          <h4 className="text-md font-bold text-white tracking-wide uppercase">
+            Consultation Request Received!
           </h4>
-          <p className="text-[11px] text-slate-600 max-w-sm">
-            Details logged successfully. We've opened your dedicated WhatsApp mentor thread. You can also watch the 5-Step credit masterclass video below:
+          <p className="text-[11px] text-slate-400 max-w-sm leading-relaxed">
+            Thank you, {name.trim()}. Your details have been logged and a member of our team will be in touch with you shortly to arrange your free consultation.
+          </p>
+          <p className="text-[10px] text-brand font-semibold uppercase tracking-wider">
+            Please only one submission per person.
           </p>
         </div>
 
@@ -329,26 +317,13 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
           )}
         </div>
 
-        {/* Action Call Outs */}
-        <div className="space-y-2.5 pt-1">
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full flex items-center justify-center gap-2 rounded-lg bg-brand px-6 py-3 text-xs font-extrabold text-slate-950 hover:bg-brand-hover active:scale-[0.99] transition duration-200 shadow-md shadow-brand-glow uppercase tracking-widest text-center"
-          >
-            <span>Launch WhatsApp Thread</span>
-            <ExternalLink className="h-3.5 w-3.5" />
-          </a>
-          
-          <button
-            onClick={handleReset}
-            className="w-full flex items-center justify-center gap-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-250 py-2 text-[10px] text-slate-600 hover:text-slate-800 transition duration-200"
-          >
-            <RefreshCw className="h-3 w-3" />
-            <span>Register a different prospect / Retry</span>
-          </button>
-        </div>
+        <button
+          onClick={handleReset}
+          className="w-full flex items-center justify-center gap-1.5 rounded-lg bg-slate-950 hover:bg-slate-900 border border-white/5 py-2 text-[10px] text-slate-500 hover:text-slate-300 transition duration-200"
+        >
+          <RefreshCw className="h-3 w-3" />
+          <span>Submit another enquiry</span>
+        </button>
       </div>
     );
   }

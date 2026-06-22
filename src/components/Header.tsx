@@ -19,7 +19,7 @@ export default function Header({ currentView, onSetView, onOpenModal }: HeaderPr
           className="flex items-center cursor-pointer focus:outline-none"
           aria-label="Go to home"
         >
-          <KiloluLogo size="custom" width={48} height={48} className="text-brand hover:scale-105 transition-transform duration-300" />
+          <KiloluLogo size="custom" width={78} height={78} className="text-white hover:scale-105 transition-transform duration-300" />
         </button>
 
         {/* Anchor links inside header / Conditional on currentView */}
@@ -39,9 +39,9 @@ export default function Header({ currentView, onSetView, onOpenModal }: HeaderPr
           <nav className="hidden lg:flex items-center gap-8 text-[11px] font-bold uppercase tracking-widest text-slate-400">
             <button 
               onClick={() => onSetView('landing')}
-              className="text-slate-400 hover:text-brand transition-colors duration-200 focus:outline-none cursor-pointer"
+              className="text-slate-400 hover:text-brand transition-colors duration-200 focus:outline-none cursor-pointer uppercase"
             >
-              ← Back to Credit Repair
+              ← Fix my Credit First
             </button>
             <span className="text-amber-500/60 select-none">|</span>
             <span className="text-amber-400 uppercase tracking-widest">MBO Gold Elite Community</span>
@@ -56,7 +56,7 @@ export default function Header({ currentView, onSetView, onOpenModal }: HeaderPr
                 onClick={() => onSetView('good-credit')}
                 className="inline-flex items-center gap-1.5 rounded-lg border border-amber-500/30 bg-amber-500/10 hover:bg-amber-500 hover:text-slate-950 hover:shadow-[0_0_15px_rgba(245,158,11,0.2)] active:scale-95 transition-all px-4 py-2 text-[10px] font-black uppercase tracking-wider text-amber-400 cursor-pointer"
               >
-                <span>I have good credit</span>
+                <span>Actually i have good credit</span>
               </button>
               
               <button
@@ -64,7 +64,7 @@ export default function Header({ currentView, onSetView, onOpenModal }: HeaderPr
                 className="hidden sm:inline-flex items-center gap-1.5 rounded-lg bg-brand hover:bg-brand-hover hover:shadow-brand-glow active:scale-95 transition-all px-4 py-2 text-[10px] font-black uppercase tracking-wider text-slate-950 shadow-md cursor-pointer"
               >
                 <Video className="h-3 w-3 fill-current" />
-                <span>Free Training</span>
+                <span>Book Your Free Consultation</span>
               </button>
             </>
           ) : (

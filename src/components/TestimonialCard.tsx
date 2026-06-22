@@ -61,7 +61,7 @@ export default function TestimonialCard({ testimonial, onClick, onPlayVideo }: T
           "{testimonial.title}"
         </p>
         <span className="mt-2 text-[10px] text-slate-400 font-medium">
-          {testimonial.clientName}, <span className="text-slate-500">{testimonial.role}</span>
+          {testimonial.clientName}
         </span>
       </div>
     </>

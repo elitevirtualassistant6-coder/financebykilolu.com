@@ -31,7 +31,7 @@ export default function GoodCreditView({ onSetView }: GoodCreditViewProps) {
             className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-brand transition-colors duration-200 cursor-pointer"
           >
             <ArrowLeft className="h-4 w-4" />
-            <span>Back to credit repair</span>
+            <span>Fix my credit first</span>
           </button>
         </div>
 
@@ -132,6 +132,17 @@ export default function GoodCreditView({ onSetView }: GoodCreditViewProps) {
         
         {/* Primary Call to Action buttons */}
         <div className="mt-14 text-center space-y-6">
+          <div
+            //href="https://www.skool.com/mbo-gold-community-7081/about"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-full max-w-2xl mx-auto rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white transition-all shadow-lg active:scale-[0.99] cursor-pointer px-8 py-7 space-y-2"
+          >
+            <p className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-slate-950">
+              ONLY 10 SLOTS AVAILABLE WEEKLY
+            </p>
+          </div>
+
           <p className="text-xs text-slate-400 font-mono uppercase tracking-widest">
             {" "}
             Ready to join the circle?{" "}

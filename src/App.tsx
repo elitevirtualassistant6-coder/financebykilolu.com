@@ -51,7 +51,7 @@ export default function App() {
       googleWebAppUrl: 'https://script.google.com/macros/s/AKfycbyiapwqtU_k0ZJIlnX3-xwByerB5uA3Qlw9JZUk0vbWIOEqoxhBFjtGaAU96xrsNVmO/exec',
       whatsAppNumber: '447424445868',
       customMessage: "Hi Joshua, I've just registered for the free credit training. Here are my details:\n\nName: {NAME}\nEmail: {EMAIL}\n\nI look forward to learning the 5-step framework.",
-      freeTrainingUrl: 'https://youtube.com/shorts/7JLKIPsRREQ'
+      freeTrainingUrl: 'https://youtu.be/V-hrJnIMMpU?si=EnPglEEjEyDNY-CF'
     };
     const stored = localStorage.getItem('joshua_credit_campaign_settings');
     if (stored) {
@@ -193,10 +193,10 @@ export default function App() {
                       {/* Card indicator */}
                       <div className="text-center space-y-1 mb-6">
                         <h2 className="text-xl font-bold text-white mb-2">
-                          Watch the Training
+                          100% FREE CONSULTATION
                         </h2>
                         <p className="text-slate-400 text-xs">
-                          Instant access to the 5-step masterclass
+                          Enter your details to speak to our team directly and unlock our training which breaks down step by step how to go from poor credit to excellent credit in the UK
                         </p>
                       </div>
 
@@ -209,7 +209,7 @@ export default function App() {
                         />
                       </div>
                       <p className="text-[9px] text-slate-400 text-center mt-4 uppercase tracking-wider font-semibold">
-                        Redirects directly to private WhatsApp training session
+                        Please only complete if you are serious about fixing your credit
                       </p>
                     </div>
                   </div>
@@ -404,7 +404,7 @@ export default function App() {
                       Choose DIY if:
                     </h4>
                     <p className="text-xs sm:text-sm text-white leading-relaxed">
-                      you want the exact system at a lower entry point and
+                      You want the exact system at a lower entry point and
                       you're happy to action it yourself with AI doing the
                       legwork.
                     </p>
@@ -414,7 +414,7 @@ export default function App() {
                       Choose 1-2-1 Done-For-You if:
                     </h4>
                     <p className="text-xs sm:text-sm text-white leading-relaxed">
-                      your time is better spent elsewhere, you want it handled
+                      Your time is better spent elsewhere, you want it handled
                       end-to-end, and you're ready to give us the full detail we
                       need to fight your case properly.
                     </p>
@@ -756,22 +756,21 @@ export default function App() {
             <div className="flex items-center">
               <KiloluLogo
                 size="custom"
-                width={42}
-                height={42}
-                className="text-brand"
+                width={72}
+                height={72}
+                className="text-white"
               />
             </div>
 
             <p className="text-center md:text-left text-[10px] text-slate-500 max-w-md leading-relaxed">
               Important Disclaimer: Fixed credit outcomes depend on specific
               client history. We provide education, strategies, and audits but
-              cannot guarantee outcomes with third-party companies. 2026 KILOLU.
-              All rights reserved.
+              cannot guarantee outcomes with third-party companies.
             </p>
           </div>
 
           <div className="mt-8 border-t border-white/5 pt-8 text-center text-[10px] text-slate-500">
-            <p>&copy; 2026 Joshua Credit Consulting. All rights reserved.</p>
+            <p>&copy; 2026 KILOLU. All rights reserved.</p>
           </div>
         </div>
       </footer>

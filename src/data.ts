@@ -86,7 +86,7 @@ export const TESTIMONIALS: Testimonial[] = [
     clientName: 'Wasim',
     role: 'Case Review',
     imageUrl: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400',
-    videoUrl: 'https://youtube.com/shorts/Ml9pjnB5b5Y?feature=share'
+    videoUrl: 'https://youtu.be/Lo0bNKEel24'
   }
 ];
 
