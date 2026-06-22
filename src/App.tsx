@@ -403,7 +403,7 @@ export default function App() {
                     <h4 className="text-sm font-black uppercase text-brand tracking-widest">
                       Choose DIY if:
                     </h4>
-                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-white leading-relaxed">
                       you want the exact system at a lower entry point and
                       you're happy to action it yourself with AI doing the
                       legwork.
@@ -413,7 +413,7 @@ export default function App() {
                     <h4 className="text-sm font-black uppercase text-brand tracking-widest">
                       Choose 1-2-1 Done-For-You if:
                     </h4>
-                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-white leading-relaxed">
                       your time is better spent elsewhere, you want it handled
                       end-to-end, and you're ready to give us the full detail we
                       need to fight your case properly.
@@ -436,7 +436,7 @@ export default function App() {
                       <h2 className="text-xl font-black text-white tracking-tight font-display">
                         Do it yourself - with the exact system we use.
                       </h2>
-                      <p className="mt-3 text-xs leading-relaxed text-slate-300 font-sans">
+                      <p className="mt-3 text-xs leading-relaxed text-white font-sans">
                         This isn't a generic "how credit works" course. This is
                         the precise method we use for our 1-2-1 done-for-you
                         clients, handed straight to you.
