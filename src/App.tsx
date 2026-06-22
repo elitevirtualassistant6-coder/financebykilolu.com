@@ -185,7 +185,7 @@ export default function App() {
                 </div>
 
                 {/* Hero Right Squeeze Lead Form card */}
-                <div className="lg:col-span-5 w-full">
+                <div id="hero-form" className="lg:col-span-5 w-full scroll-mt-30 lg:scroll-mt-30">
                   <div className="relative mx-auto max-w-md">
                     <div className="absolute -inset-1.5 rounded-2xl bg-gradient-to-r from-brand to-cyan-500 blur-xl opacity-35 -z-10 animate-pulse" />
 
@@ -196,7 +196,12 @@ export default function App() {
                           100% FREE CONSULTATION
                         </h2>
                         <p className="text-slate-400 text-xs">
-                          Enter your details to speak to our team directly and unlock our training which breaks down step by step how to go from poor credit to excellent credit in the UK
+                          Enter your details to speak to our team directly and
+                          unlock our training which breaks down step by step how
+                          to go from poor credit to excellent credit in the UK
+                        </p>
+                        <p className="text-slate-400 text-xs">
+                          ONLY 10 SLOTS AVAILABLE WEEKLY
                         </p>
                       </div>
 
@@ -209,7 +214,8 @@ export default function App() {
                         />
                       </div>
                       <p className="text-[9px] text-slate-400 text-center mt-4 uppercase tracking-wider font-semibold">
-                        Please only complete if you are serious about fixing your credit
+                        Please only complete if you are serious about fixing
+                        your credit
                       </p>
                     </div>
                   </div>
@@ -612,19 +618,17 @@ export default function App() {
 
               <p className="mx-auto max-w-lg text-xs sm:text-sm text-slate-400 leading-relaxed">
                 Have urgent questions or specific concerns about your unique
-                situation? Email Joshua directly to clear doubts instantly.
+                situation? Message Joshua directly to clear doubts instantly.
               </p>
 
               <div className="pt-2">
-                <a
-                  href={`mailto:info@kilolu.co.uk`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={() => document.getElementById('hero-form')?.scrollIntoView({ behavior: 'smooth' })}
                   className="inline-flex items-center gap-2 rounded-lg bg-slate-900 border border-white/15 hover:border-brand hover:bg-slate-800 text-white px-6 py-3.5 text-[11px] font-bold tracking-widest uppercase transition-all shadow-md cursor-pointer animate-pulse"
                 >
-                  <span>EMAIL JOSHUA </span>
+                  <span>CONTACT US </span>
                   <ArrowUpRight className="h-4 w-4 text-brand" />
-                </a>
+                </button>
               </div>
             </div>
           </section>
