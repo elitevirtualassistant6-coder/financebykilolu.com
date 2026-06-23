@@ -196,11 +196,6 @@ export default function App() {
                           100% FREE CONSULTATION
                         </h2>
                         <p className="text-slate-400 text-xs">
-                          Enter your details to speak to our team directly and
-                          unlock our training which breaks down step by step how
-                          to go from poor credit to excellent credit in the UK
-                        </p>
-                        <p className="text-slate-400 text-xs">
                           ONLY 10 SLOTS AVAILABLE WEEKLY
                         </p>
                       </div>
@@ -503,12 +498,14 @@ export default function App() {
                   </div>
 
                   <div className="mt-8 pt-4 border-t border-white/10">
-                    <button
-                      onClick={handleOpenModal}
+                    <a
+                      href="https://brand.kilolu.co.uk/payment-link/68e3de2fc3d7dfdf7d267439"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="block w-full text-center rounded-lg bg-brand hover:bg-white text-slate-950 px-6 py-4 text-xs font-bold leading-none tracking-widest uppercase transition-all shadow-md active:scale-95 cursor-pointer"
                     >
                       GET THE DIY COURSE
-                    </button>
+                    </a>
                   </div>
                 </div>
 
@@ -593,13 +590,58 @@ export default function App() {
                     </div>
                   </div>
 
-                  <div className="mt-8 pt-4 border-t border-white/10">
-                    <button
-                      onClick={handleOpenModal}
-                      className="block w-full text-center rounded-lg bg-brand hover:bg-white px-6 py-4 text-xs font-bold leading-none tracking-widest text-slate-950 transition shadow-lg shadow-brand-glow cursor-pointer"
+                  <div className="mt-8 pt-4 border-t border-white/10 space-y-3">
+                    {/* Late Payment - SOLD OUT */}
+                    <div className="relative">
+                      <button
+                        disabled
+                        className="w-full text-center rounded-lg bg-slate-800 border border-white/10 text-slate-500 px-4 py-3 text-[11px] font-bold leading-none tracking-widest uppercase transition-all cursor-not-allowed opacity-60"
+                      >
+                        <span className="flex items-center justify-center gap-2">
+                          <span>LATE PAYMENT FORM</span>
+                          <span className="bg-red-500/20 text-red-400 px-2 py-0.5 rounded text-[9px] font-black">100% SOLD OUT</span>
+                        </span>
+                      </button>
+                    </div>
+
+                    {/* Default Form - 5 spaces left */}
+                    <a
+                      href="https://forms.gle/sYk17KQb2PwMa2SD7"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full text-center rounded-lg bg-brand hover:bg-white text-slate-950 px-4 py-3 text-[11px] font-bold leading-none tracking-widest uppercase transition-all shadow-md active:scale-95 cursor-pointer"
                     >
-                      APPLY FOR THE 1-2-1 DONE-FOR-YOU SERVICE
-                    </button>
+                      <span className="flex items-center justify-center gap-2">
+                        <span>DEFAULT FORM</span>
+                        <span className="bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded text-[9px] font-black">5 SPACES LEFT</span>
+                      </span>
+                    </a>
+
+                    {/* CCJ Form - 5 spaces left */}
+                    <a
+                      href="https://forms.gle/a2zmDMCtuqrLjQer5"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full text-center rounded-lg bg-brand hover:bg-white text-slate-950 px-4 py-3 text-[11px] font-bold leading-none tracking-widest uppercase transition-all shadow-md active:scale-95 cursor-pointer"
+                    >
+                      <span className="flex items-center justify-center gap-2">
+                        <span>CCJ FORM</span>
+                        <span className="bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded text-[9px] font-black">5 SPACES LEFT</span>
+                      </span>
+                    </a>
+
+                    {/* CIFAS Marker Form - 8 spaces left */}
+                    <a
+                      href="https://forms.gle/yKmiSFQTuhhimwfr6"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full text-center rounded-lg bg-brand hover:bg-white text-slate-950 px-4 py-3 text-[11px] font-bold leading-none tracking-widest uppercase transition-all shadow-md active:scale-95 cursor-pointer"
+                    >
+                      <span className="flex items-center justify-center gap-2">
+                        <span>CIFAS MARKER FORM</span>
+                        <span className="bg-green-500/20 text-green-400 px-2 py-0.5 rounded text-[9px] font-black">8 SPACES LEFT</span>
+                      </span>
+                    </a>
                   </div>
                 </div>
               </div>

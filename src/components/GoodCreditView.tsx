@@ -163,7 +163,7 @@ export default function GoodCreditView({ onSetView }: GoodCreditViewProps) {
               onClick={() => onSetView("landing")}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-slate-900 hover:bg-slate-800 text-white font-bold px-8 py-5 text-xs tracking-widest uppercase transition-all active:scale-95 cursor-pointer"
             >
-              <span>Or credit repair</span>
+              <span>OR FIX MY CREDIT FIRST</span>
             </button>
           </div>
         </div>
