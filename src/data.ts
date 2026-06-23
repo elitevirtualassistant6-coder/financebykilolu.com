@@ -43,7 +43,7 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     id: 't1',
     title: 'Kayla had an unfair CIFAS marker removed after following our steps',
-    clientName: 'kayla',
+    clientName: 'Kayla',
     role: 'Case Study',
     imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400',
     videoUrl: 'https://youtube.com/shorts/GFZ5r9O3dDs'
