@@ -729,43 +729,6 @@ export default function App() {
               </div>
             </div>
           </section>
-          {/* Bottom Final conversion CTA block */}
-          <section className="relative overflow-hidden py-24 sm:py-32 border-t border-white/10 bg-black">
-            <div className="absolute inset-x-0 top-0 -z-10 h-full w-full bg-[radial-gradient(60rem_40rem_at_center,rgba(72,192,206,0.12),transparent)] opacity-85" />
-
-            <div className="mx-auto max-w-4xl px-6 sm:px-8 text-center space-y-6">
-              {/* <span className="text-[10px] font-bold text-brand tracking-widest uppercase bg-cyan-950/60 border border-brand/35 px-2.5 py-1 rounded">
-                FINAL CTA
-              </span> */}
-
-              <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl font-display">
-                Start Your Journey Here
-              </h2>
-
-              <p className="mx-auto max-w-2xl text-xs sm:text-sm text-slate-400 leading-relaxed font-sans font-medium">
-                If you're tired of poor credit holding you back, and you're
-                ready to actually do something about it instead of waiting it
-                out - this is where you start.
-              </p>
-
-              <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <button
-                  onClick={handleOpenModal}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white border border-white/10 px-8 py-4 text-xs font-bold leading-none tracking-widest uppercase transition-all shadow-md active:scale-95 cursor-pointer"
-                >
-                  <span>GET THE DIY COURSE</span>
-                  <ArrowRight className="h-4 w-4 text-brand" />
-                </button>
-                <button
-                  onClick={handleOpenModal}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-brand hover:bg-brand-hover text-slate-950 px-8 py-4 text-xs font-bold leading-none tracking-widest uppercase transition-all shadow-md active:scale-95 cursor-pointer"
-                >
-                  <span>APPLY FOR 1-2-1 DONE-FOR-YOU</span>
-                  <Sparkles className="h-4 w-4 text-slate-950" />
-                </button>
-              </div>
-            </div>
-          </section>
         </>
       ) : (
         <GoodCreditView onSetView={setCurrentView} />
