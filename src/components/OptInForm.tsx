@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { AppSettings } from '../types';
-import { ArrowRight, ArrowLeft, Loader2, Shield, Mail, User, Phone, CheckCircle2, ExternalLink, RefreshCw, BookOpen } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Loader2, Mail, User, Phone, CheckCircle2, ExternalLink, BookOpen } from 'lucide-react';
 
 interface OptInFormProps {
   settings: AppSettings;
@@ -9,6 +9,13 @@ interface OptInFormProps {
 }
 
 const DIY_COURSE_URL = 'https://brand.kilolu.co.uk/payment-link/68e3de2fc3d7dfdf7d267439';
+
+const MARKER_FORM_LINKS = {
+  latePayment: '#', // 100% SOLD OUT
+  default: 'https://forms.gle/sYk17KQb2PwMa2SD7',
+  ccj: 'https://forms.gle/a2zmDMCtuqrLjQer5',
+  cifas: 'https://brand.kilolu.co.uk/widget/survey/QVIWDF3OCDlx3gXCyqhZ',
+};
 
 const CREDIT_MARKER_OPTIONS = [
   'Late payment',
@@ -29,26 +36,8 @@ const SERVICE_OPTIONS = [
   },
 ];
 
-// Extract video ID and return standard embed URL
-function getYoutubeEmbedUrl(url: string = ''): string {
-  if (!url) return '';
-  let videoId = '';
-  const shortsMatch = url.match(/\/shorts\/([a-zA-Z0-9_-]{11})/);
-  if (shortsMatch && shortsMatch[1]) {
-    videoId = shortsMatch[1];
-  } else {
-    const watchMatch = url.match(/(?:\?v=|\/embed\/|\/watch\?v=|\/\d\/|vi\/|youtu\.be\/|v\/)([a-zA-Z0-9_-]{11})/);
-    if (watchMatch && watchMatch[1]) {
-      videoId = watchMatch[1];
-    }
-  }
-  if (videoId) {
-    return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&rel=0`;
-  }
-  return url;
-}
-
 interface RadioOptionProps {
+  key?: React.Key;
   value: string;
   label: string;
   currentValue: string;
@@ -97,9 +86,6 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
   const [routeOutcome, setRouteOutcome] = useState<'diy' | 'dfy' | null>(null);
   const [routeReason, setRouteReason] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-
-  const isShorts = settings.freeTrainingUrl ? settings.freeTrainingUrl.includes('/shorts/') : true;
-  const embedUrl = getYoutubeEmbedUrl(settings.freeTrainingUrl || 'https://youtu.be/V-hrJnIMMpU?si=EnPglEEjEyDNY-CF');
 
   const submitToSheets = async (extraData: Record<string, string> = {}) => {
     if (settings.googleWebAppUrl && settings.googleWebAppUrl !== 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL') {
@@ -169,7 +155,6 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
         setRouteReason('');
         setIsSubmitted(true);
         setIsSubmitting(false);
-        try { window.open(DIY_COURSE_URL, '_blank'); } catch {}
         return;
       }
       setStep(3);
@@ -188,7 +173,6 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
         setRouteReason('Based on your answers, our DIY course is the best fit for you right now.');
         setIsSubmitted(true);
         setIsSubmitting(false);
-        try { window.open(DIY_COURSE_URL, '_blank'); } catch {}
         return;
       }
       setStep(4);
@@ -207,7 +191,6 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
         setRouteReason('To qualify for 1-2-1, we need full details, screenshots and correspondence. For now, the DIY course is the better route.');
         setIsSubmitted(true);
         setIsSubmitting(false);
-        try { window.open(DIY_COURSE_URL, '_blank'); } catch {}
         return;
       }
       await submitToSheets({ Q1: q1Answer, Q2: SERVICE_OPTIONS.find((o) => o.value === q2Answer)?.label ?? q2Answer, Q3: 'Yes', Q4: 'Yes' });
@@ -216,21 +199,6 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
       setIsSubmitting(false);
       return;
     }
-  };
-
-  const handleReset = () => {
-    setStep(0);
-    setName('');
-    setPhone('');
-    setEmail('');
-    setQ1Answer('');
-    setQ2Answer('');
-    setQ3Answer('');
-    setQ4Answer('');
-    setIsSubmitted(false);
-    setRouteOutcome(null);
-    setRouteReason('');
-    setErrorMsg('');
   };
 
   // --- Submitted: DIY outcome ---
@@ -249,8 +217,8 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
               {routeReason}
             </p>
           )}
-          <p className="text-[11px] text-slate-400 max-w-sm">
-            Our DIY course gives you AI prompts, legal documents, perfected dispute scripts, and escalation strategy to follow yourself. We've opened the course page for you.
+          <p className="text-[11px] text-slate-400 max-w-sm leading-relaxed">
+            Our DIY course gives you AI prompts, legal documents, perfected dispute scripts, and escalation strategy to follow yourself.
           </p>
         </div>
         <div className="space-y-2.5 pt-1">
@@ -260,23 +228,19 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
             rel="noopener noreferrer"
             className="w-full flex items-center justify-center gap-2 rounded-lg bg-brand px-6 py-3 text-xs font-extrabold text-slate-950 hover:bg-brand-hover active:scale-[0.99] transition duration-200 shadow-xl shadow-brand-glow uppercase tracking-widest text-center"
           >
-            <span>Access DIY Course</span>
+            <span>View DIY Course</span>
             <ExternalLink className="h-3.5 w-3.5" />
           </a>
-          <button
-            onClick={handleReset}
-            className="w-full flex items-center justify-center gap-1.5 rounded-lg bg-slate-950 hover:bg-slate-900 border border-white/5 py-2 text-[10px] text-slate-500 hover:text-slate-300 transition duration-200"
-          >
-            <RefreshCw className="h-3 w-3" />
-            <span>Start over / Different answers</span>
-          </button>
         </div>
+        <p className="text-[11px] text-amber-400 text-center bg-amber-500/10 border border-amber-500/20 px-3 py-3 rounded-lg leading-relaxed">
+          Thanks for completing the form — Joshua will WhatsApp you as soon as possible. Please be ready with your phone as demand is extremely high.
+        </p>
       </div>
     );
   }
 
-  // --- Submitted: DFY consultation booked outcome ---
-  if (isSubmitted && routeOutcome === 'dfy') { 
+  // --- Submitted: DFY success — show 4 marker-specific form buttons ---
+  if (isSubmitted && routeOutcome === 'dfy') {
     return (
       <div className="space-y-5 animate-in fade-in duration-300">
         <div className="flex flex-col items-center text-center space-y-3 mb-2">
@@ -284,46 +248,72 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
             <CheckCircle2 className="h-6 w-6 text-brand" />
           </div>
           <h4 className="text-md font-bold text-white tracking-wide uppercase">
-            Consultation Request Received!
+            You're Pre-Qualified
           </h4>
           <p className="text-[11px] text-slate-400 max-w-sm leading-relaxed">
-            Thank you, {name.trim()}. Your details have been logged and a member of our team will be in touch with you shortly to arrange your free consultation.
+            Thank you, {name.trim()}. Choose the form that matches your negative marker and apply for the 1-2-1 done-for-you service.
           </p>
           <p className="text-[10px] text-brand font-semibold uppercase tracking-wider">
-            Please only one submission per person.
+            Spaces are limited — only serious applications reviewed.
           </p>
         </div>
 
-        {/* Dynamic Video Player embed */}
-        <div className="relative w-full">
-          {embedUrl ? (
-            <div className={
-              isShorts 
-                ? "aspect-[9/16] w-full max-w-[210px] mx-auto overflow-hidden rounded-xl border border-slate-200 bg-black shadow-lg relative" 
-                : "aspect-video w-full overflow-hidden rounded-xl border border-slate-200 bg-black shadow-lg relative"
-            }>
-              <iframe
-                src={embedUrl}
-                title="Joshua Credit Consulting Free Training Video masterclass"
-                className="absolute inset-0 w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
-            </div>
-          ) : (
-            <div className="aspect-video w-full rounded-xl bg-slate-100 flex flex-col items-center justify-center border border-slate-200 gap-3">
-              <span className="text-xs text-slate-500">Video Player unavailable</span>
-            </div>
-          )}
+        {/* 1-2-1 application form options */}
+        <div className="space-y-2.5">
+          {/* Late Payment - SOLD OUT */}
+          <button
+            disabled
+            className="w-full text-center rounded-lg bg-slate-800 border border-white/10 text-slate-500 px-4 py-3 text-[11px] font-bold leading-none tracking-widest uppercase transition-all cursor-not-allowed opacity-60"
+          >
+            <span className="flex items-center justify-center gap-2">
+              <span>LATE PAYMENT FORM</span>
+              <span className="bg-red-500/20 text-red-400 px-2 py-0.5 rounded text-[9px] font-black">100% SOLD OUT</span>
+            </span>
+          </button>
+
+          {/* Default Form - 5 spaces left */}
+          <a
+            href={MARKER_FORM_LINKS.default}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-full text-center rounded-lg bg-brand hover:bg-white text-slate-950 px-4 py-3 text-[11px] font-bold leading-none tracking-widest uppercase transition-all shadow-md active:scale-95 cursor-pointer"
+          >
+            <span className="flex items-center justify-center gap-2">
+              <span>DEFAULT FORM</span>
+              <span className="bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded text-[9px] font-black">5 SPACES LEFT</span>
+            </span>
+          </a>
+
+          {/* CCJ Form - 5 spaces left */}
+          <a
+            href={MARKER_FORM_LINKS.ccj}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-full text-center rounded-lg bg-brand hover:bg-white text-slate-950 px-4 py-3 text-[11px] font-bold leading-none tracking-widest uppercase transition-all shadow-md active:scale-95 cursor-pointer"
+          >
+            <span className="flex items-center justify-center gap-2">
+              <span>CCJ FORM</span>
+              <span className="bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded text-[9px] font-black">5 SPACES LEFT</span>
+            </span>
+          </a>
+
+          {/* CIFAS Marker Form - 8 spaces left */}
+          <a
+            href={MARKER_FORM_LINKS.cifas}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block w-full text-center rounded-lg bg-brand hover:bg-white text-slate-950 px-4 py-3 text-[11px] font-bold leading-none tracking-widest uppercase transition-all shadow-md active:scale-95 cursor-pointer"
+          >
+            <span className="flex items-center justify-center gap-2">
+              <span>CIFAS MARKER FORM</span>
+              <span className="bg-green-500/20 text-green-400 px-2 py-0.5 rounded text-[9px] font-black">8 SPACES LEFT</span>
+            </span>
+          </a>
         </div>
 
-        <button
-          onClick={handleReset}
-          className="w-full flex items-center justify-center gap-1.5 rounded-lg bg-slate-950 hover:bg-slate-900 border border-white/5 py-2 text-[10px] text-slate-500 hover:text-slate-300 transition duration-200"
-        >
-          <RefreshCw className="h-3 w-3" />
-          <span>Submit another enquiry</span>
-        </button>
+        <p className="text-[11px] text-amber-400 text-center bg-amber-500/10 border border-amber-500/20 px-3 py-3 rounded-lg leading-relaxed">
+          Thanks for completing the form — Joshua will WhatsApp you as soon as possible. Please be ready with your phone as demand is extremely high.
+        </p>
       </div>
     );
   }
@@ -482,7 +472,6 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
                       setRouteReason('');
                       setIsSubmitted(true);
                       setIsSubmitting(false);
-                      try { window.open(DIY_COURSE_URL, '_blank'); } catch {}
                     } else {
                       setDirection('forward');
                       setStep(3);
@@ -539,7 +528,6 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
                       setRouteReason('Based on your answers, our DIY course is the best fit for you right now.');
                       setIsSubmitted(true);
                       setIsSubmitting(false);
-                      try { window.open(DIY_COURSE_URL, '_blank'); } catch {}
                     } else {
                       setDirection('forward');
                       setStep(4);
@@ -599,20 +587,11 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
                       setRouteReason('To qualify for 1-2-1, we need full details, screenshots and correspondence. For now, the DIY course is the better route.');
                       setIsSubmitted(true);
                       setIsSubmitting(false);
-                      try { window.open(DIY_COURSE_URL, '_blank'); } catch {}
                     } else {
                       await submitToSheets({ Q1: q1Answer, Q2: SERVICE_OPTIONS.find((o) => o.value === q2Answer)?.label ?? q2Answer, Q3: 'Yes', Q4: 'Yes' });
-                      let personalizedMsg = settings.customMessage;
-                      personalizedMsg = personalizedMsg.replace(/{NAME}/g, name.trim());
-                      personalizedMsg = personalizedMsg.replace(/{EMAIL}/g, email.trim());
-                      const encodedMessage = encodeURIComponent(personalizedMsg);
-                      const whatsAppNumberToUse = settings.whatsAppNumber || '447424445868';
-                      const targetUrl = `https://wa.me/${whatsAppNumberToUse}?text=${encodedMessage}`;
-                      setWhatsappUrl(targetUrl);
                       setRouteOutcome('dfy');
                       setIsSubmitted(true);
                       setIsSubmitting(false);
-                      try { window.open(targetUrl, '_blank'); } catch {}
                     }
                   }}
                 />
