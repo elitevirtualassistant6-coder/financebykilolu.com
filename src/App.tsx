@@ -113,7 +113,7 @@ export default function App() {
               <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8 items-center">
                 {/* Hero Left Content Column */}
                 <div className="lg:col-span-7 text-center lg:text-left space-y-6">
-                  <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3">
+                  {/* <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3">
                     <div className="inline-flex items-center gap-2 bg-cyan-950/60 text-brand px-3 py-1 ring-1 ring-brand/35 rounded-full text-[10px] font-bold uppercase tracking-widest">
                       <Sparkles className="h-3 w-3 animate-pulse text-brand" />
                       <span>Free Credit Framework 2026</span>
@@ -125,7 +125,7 @@ export default function App() {
                       <Sparkles className="h-3 w-3 text-amber-400 group-hover:text-amber-950" />
                       <span>I Have Good Credit →</span>
                     </button>
-                  </div>
+                  </div> */}
 
                   <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl leading-[1.15] mb-6 font-display">
                     Got a{" "}
@@ -329,9 +329,7 @@ export default function App() {
                   Real Client Success Stories
                 </h2>
                 <p className="mx-auto max-w-2xl text-sm sm:text-base text-slate-400 leading-relaxed font-normal">
-                  Don't just take our word for it. Review real clients share
-                  their experiences and structural improvements after
-                  implementing our framework.
+                  Don't take our word for it. See the results real clients are getting - negative markers removed, credit rebuilt, using our exact frameworks.
                 </p>
               </div>
 
@@ -415,9 +413,7 @@ export default function App() {
                       Choose 1-2-1 Done-For-You if:
                     </h4>
                     <p className="text-xs sm:text-sm text-white leading-relaxed">
-                      Your time is better spent elsewhere, you want it handled
-                      end-to-end, and you're ready to give us the full detail we
-                      need to fight your case properly.
+                      Your time is better spent elsewhere, you want it handled end-to-end, and you're ready to give us the full details we need to fight your case properly.
                     </p>
                   </div>
                 </div>
@@ -738,9 +734,9 @@ export default function App() {
             <div className="absolute inset-x-0 top-0 -z-10 h-full w-full bg-[radial-gradient(60rem_40rem_at_center,rgba(72,192,206,0.12),transparent)] opacity-85" />
 
             <div className="mx-auto max-w-4xl px-6 sm:px-8 text-center space-y-6">
-              <span className="text-[10px] font-bold text-brand tracking-widest uppercase bg-cyan-950/60 border border-brand/35 px-2.5 py-1 rounded">
+              {/* <span className="text-[10px] font-bold text-brand tracking-widest uppercase bg-cyan-950/60 border border-brand/35 px-2.5 py-1 rounded">
                 FINAL CTA
-              </span>
+              </span> */}
 
               <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl font-display">
                 Start Your Journey Here

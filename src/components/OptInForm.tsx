@@ -639,10 +639,10 @@ export default function OptInForm({ settings, sourceLocation }: OptInFormProps) 
         </div>
       )}
 
-      <div className="flex justify-center items-center gap-1.5 text-[10px] text-slate-500">
+      {/* <div className="flex justify-center items-center gap-1.5 text-[10px] text-slate-500">
         <Shield className="h-3 w-3 text-brand-dark/60" />
         <span>Secure submission. Leads synced to Spreadsheet instantly.</span>
-      </div>
+      </div> */}
     </div>
   );
 }
