@@ -38,7 +38,7 @@ export default async function handler(req: any, res: any) {
     const activePixelId = pixelId || process.env.META_PIXEL_ID || '1685323672688170';
 
     // Determine target Conversions API Access Token
-    const activeAccessToken = accessToken || process.env.META_CAPI_ACCESS_TOKEN || 'EAAV37U9GLhUBR0f8vGxdrmoUbo92vf21R5jMlQLvr1anQTDJdpt09jUouDFZAdZBX0yH0wbn2VEfcdn8wuniWJpUmGgS5gzPlXtg8HXPApwiTsHZAFZCGoIYol7TtYHo6F5L9Xs8sTCUiR4kw4ZB8tTudMzZC1QRHrlbzmhRZAkSCQ8MxkrZCvo2dJEaHl3oVpZBzhSbQ';
+    const activeAccessToken = accessToken || process.env.META_CAPI_ACCESS_TOKEN || 'EAAV37U9GLhUBR3xbZCSqZAwNMEM75nAZAs6XrbRuvy9CpKWOAHBIxcPbnZC0rdVCUNUD34wzrZA2zL0wV3D2pKzk2C0NVZBUBjhnmPBwU6MFwzTDD6bfLGnY5m6FlOdsppCJgGDRkPziSPIbnUYKQG4gIN5TYUNZCNB7nmZClts3r97w3ZBJJ92NYIS1AZApotolqpa9EW';
 
     console.log(`[Meta CAPI Serverless] Processing "${eventName || 'Lead'}" event for Pixel: ${activePixelId}`);
 
