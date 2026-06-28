@@ -35,20 +35,10 @@ export default async function handler(req: any, res: any) {
     const { eventName, email, name, pixelId, accessToken, sourceUrl } = req.body || {};
 
     // Determine target Meta Pixel ID
-    const activePixelId = pixelId || process.env.META_PIXEL_ID || process.env.VITE_META_PIXEL_ID;
-    if (!activePixelId) {
-      console.warn('[Meta CAPI Serverless] Missing Pixel ID');
-      return res.status(400).json({ error: 'Meta Pixel ID is required. Please pass it or set META_PIXEL_ID on Vercel.' });
-    }
+    const activePixelId = pixelId || process.env.META_PIXEL_ID || '1685323672688170';
 
     // Determine target Conversions API Access Token
-    const activeAccessToken = accessToken || process.env.META_CAPI_ACCESS_TOKEN || process.env.META_ACCESS_TOKEN;
-    if (!activeAccessToken) {
-      console.warn('[Meta CAPI Serverless] Missing Access Token');
-      return res.status(400).json({ 
-        error: 'Meta Conversions API Access Token is required. Please set META_CAPI_ACCESS_TOKEN on Vercel.' 
-      });
-    }
+    const activeAccessToken = accessToken || process.env.META_CAPI_ACCESS_TOKEN || 'EAAV37U9GLhUBR0f8vGxdrmoUbo92vf21R5jMlQLvr1anQTDJdpt09jUouDFZAdZBX0yH0wbn2VEfcdn8wuniWJpUmGgS5gzPlXtg8HXPApwiTsHZAFZCGoIYol7TtYHo6F5L9Xs8sTCUiR4kw4ZB8tTudMzZC1QRHrlbzmhRZAkSCQ8MxkrZCvo2dJEaHl3oVpZBzhSbQ';
 
     console.log(`[Meta CAPI Serverless] Processing "${eventName || 'Lead'}" event for Pixel: ${activePixelId}`);
 
